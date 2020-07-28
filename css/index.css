@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    color: black;
+}
+li{
+    list-style: none;
+}
+i{
+    font-style: normal;
+}
+b{
+    font-weight: normal;
+}
+nav{
+    width: 100%;
+    position: fixed;
+    top: 40px;
+}
+nav>ul{
+    width: 100%;
+    display : flex;
+    /* padding-left: 0px; */
+    padding: 0px 10px;
+}
+nav>ul>li{
+    list-style: none;
+    width: 25%;
+    text-align: center;
+    line-height: 38px;
+}
+.active{
+    color: red;
+    border-bottom: 1px solid red;
+}
+.productCon {
+    position: relative;
+    top: 80px;
+    padding: 0px 10px;
+    overflow-y: scroll;
+}
+.productCon > dl {
+    /* height: 20px; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+.productCon > dl > dt {
+    width: 35%;
+    /* background-color: red; */
+}
+.productCon > dl > dt>img{
+    width: 100%;
+}
+.productCon > dl > dd {
+    width: 60%;
+    /* background-color: yellow; */
+    align-items: flex-end;
+}
+.productCon > dl > dd>p{
+    width: 100%;
+    margin: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.productCon > dl > dd > p>i{
+    display: block;
+    height: 16px;
+    width: 16%;
+    padding:0px 5px;
+    font-size: 0.12rem;
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+}
+.productCon > dl > dd > p>span{
+    display: block;
+    width: 82%;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.productCon > dl > dd > ul{
+    margin-top: 15px;
+}
+.productCon > dl > dd>ul>li{
+    font-size: 14px;
+    /* line-height: 25px; */
+}
+.liOne{
+    color: #ccc;
+}
+.liOne>i{
+    color: red;
+}
+.liOne > i>b{
+    font-size: 16px;
+}
+.liTwo>span{
+    /* height: 24px; */
+    font-size: 12px;
+    display: inline-block;
+    color: red;
+    border: 1px solid red;
+    padding: 0px 2px;
+}
+.liThree{
+    color: #ccc;
+}
+.liFour>span{
+    color: #ccc;
+}
+.productCon > dl > dd > ul > li>a{
+    color:black;
+}

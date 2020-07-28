@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/sm.min.css">
+    <link rel="stylesheet" href="./css/ratchicons.ttf">
+    <link rel="stylesheet" href="./css/ratchicons.woff">
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="page-group">
+            <div class="page page-current">
+                <header class="bar bar-nav">
+                    <a class="icon icon-left pull-left"></a>
+                    <a class="icon icon-menu pull-right"></a>
+                    <h1 class="title">夏装上新</h1>
+                </header>
+                <nav>
+                    <ul>
+                        <li v-for="item in listTitle" :class="type==item.content?'active':''" @click="type=item.content">
+                            {{item.content}}
+                        </li>
+                        <!-- <li class="active" @click="type='人气'">人气</li>
+                        <li @click="type='最新'">最新</li>
+                        <li @click="type='销量'">销量</li>
+                        <li @click="type='价格'">价格</li> -->
+                    </ul>
+                </nav>
+                <div class="productCon">
+                    <dl v-for="item in lists">
+                        <dt>
+                            <img :src="item.pic" alt="">
+                        </dt>
+                        <dd>
+                            <p>
+                                <i>天猫</i>
+                                <span>{{item.title}}</span>
+                            </p>
+                            <ul>
+                                <li class="liOne">
+                                    券后 <i>￥<b>{{item.jiage}}</b></i>
+                                </li>
+                                <li class="liTwo">
+                                    <span>新品</span>
+                                </li>
+                                <li class="liThree">
+                                    <i>已售49</i>
+                                    <i>|</i>
+                                    <i>评论51</i>
+                                </li>
+                                <li class="liFour">
+                                    <span>{{item.shop_name}}</span>
+                                    <a href="#">进店 &gt;</a>
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:"#app",
+            data:{
+                lists:[],
+                cid:17,
+                type: '人气',
+                listTitle:[
+                    {
+                        id:1,
+                        content:'人气',
+                        flag:true
+                    },
+                    {
+                        id: 2,
+                        content: '最新',
+                        flag: false
+                    }, {
+                        id: 1,
+                        content: '销量',
+                        flag: false
+                    }, {
+                        id: 1,
+                        content: '价格',
+                        flag: false
+                    }
+                ]
+            },
+            // created:function(){
+            //     this.begain();
+            // },
+            methods:{
+                // hotProduct(){
+                //     console.log('人气');
+                //     this.active('http://59.110.226.77:3000/api/list/hot')
+                // },
+                // newProduct(){
+                //     console.log('最新');
+                // },
+                // numProduct(){
+                //     console.log('销量');
+                // },
+                // priceProduct(){
+                //     console.log('价格');
+                // },
+                active(url){
+                    axios(url,{params:{cid:this.cid}}).then(res=>{
+                        console.log(res);
+                        this.lists = res.data.data.content;
+                    }).catch(err=>{
+                        console.log(err);
+                    });
+                }
+            },
+            computed:{
+            //     newProduct(){
+            //         console.log(this.type);
+            //         switch (this.type) {
+            //             case '人气':
+            //                 this.active('http://59.110.226.77:3000/api/list/hot');
+            //                 return 123;
+            //                 break;
+            //             case '最新':
+            //                 break;
+            //             case '销量':
+            //                 break;
+            //             case '价格':
+            //                 break;
+            //             default:
+            //                 break;
+            //         }
+            //     }
+            // test(){
+            //     // return this.type;
+            //     switch (this.type) {
+            //         case '人气':
+            //             this.active('http://59.110.226.77:3000/api/list/hot');
+            //             return this.type
+            //             break;
+            //         case '最新':
+            //             this.active('http://59.110.226.77:3000/api/list/latest');
+            //             return this.type
+            //             break;
+            //         case '销量':
+            //             this.active('http://59.110.226.77:3000/api/list/sell');
+            //             return this.type
+            //             break;
+            //         case '价格':
+            //             this.active('http://59.110.226.77:3000/api/list/price');
+            //             return this.type
+            //             break;
+            //         default:
+            //             this.active('http://59.110.226.77:3000/api/list/hot');
+            //             return this.type
+            //             break;
+            //     }
+            // }
+            },
+            watch:{
+                type(){
+                    switch (this.type) {
+                    case '人气':
+                        this.active('http://59.110.226.77:3000/api/list/hot');
+                        return this.type
+                        break;
+                    case '最新':
+                        this.active('http://59.110.226.77:3000/api/list/latest');
+                        return this.type
+                        break;
+                    case '销量':
+                        this.active('http://59.110.226.77:3000/api/list/sell');
+                        return this.type
+                        break;
+                    case '价格':
+                        this.active('http://59.110.226.77:3000/api/list/price');
+                        return this.type
+                        break;
+                    default:
+                        this.active('http://59.110.226.77:3000/api/list/hot');
+                        return this.type
+                        break;
+                }
+            }
+        },
+        created:function(){
+            this.active('http://59.110.226.77:3000/api/list/hot');
+        }
+        })
+    </script>
+</body>
+</html>
